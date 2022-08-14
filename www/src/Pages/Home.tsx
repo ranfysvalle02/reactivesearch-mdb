@@ -57,12 +57,12 @@ function Home() {
                <Row>
                   <Col>
                   <SearchBase
-                     index="defaultDynamic"
-                     url="https://us-east-1.aws.data.mongodb-api.com/app/application-0-cjqyw/endpoint/http_endpoint/reactivesearch"
+                     index="default"
+                     url="https://us-east-1.aws.data.mongodb-api.com/app/runkel-rfv-demo-tyypa/endpoint/rs_demo"
                      credentials="funkydemo:funkydemo"
                      mongodb={{
-                        db: 'sample_airbnb',
-                        collection: 'listingsAndReviews'
+                        db: 'aerospace',
+                        collection: 'notes'
                      }}
                   >
                      <div>
@@ -70,10 +70,12 @@ function Home() {
                            <div className="col">
                            <SearchBox
                               id="search-component"
-                           	index="defaultDynamic" 
-                              dataField="name"
-                              placeholder="Search for listings"
+                           	index="default" 
+                              dataField={["notes"]}
+                              includeFields={['notes','title','author.name','device','parameter']}
+                              placeholder="Search for notes"
                               fuzziness={1}
+                              autosuggest={true}
                               react={{
                                  and: ['search-component','facet-component','facet-component-2','facet-component-3']
                                  }}
@@ -89,17 +91,17 @@ function Home() {
                               react={{
                                  and: ['search-component','facet-component','facet-component-2','facet-component-3']
                                  }}
-                              index="defaultDynamic"
-                              dataField="room_type"
+                              index="default"
+                              dataField="author.name"
                               URLParams
                               aggregationSize={5}
-                              includeFields={['property_type','room_type']}
+                              includeFields={['notes','author.name','device','parameter']}
                               // To initialize with default value
                               value={[]}
                               render={({ aggregationData, loading, value, setValue }) => {
                               return (
                                  <div className="filter-container">
-                                    <h3>Room Types</h3>
+                                    <h3>Author</h3>
                                     {loading ? (
                                     <div>Loading Filters ...</div>
                                     ) : (
@@ -138,11 +140,11 @@ function Home() {
                               title="Facet"
                               id="facet-component-2"
                               type="term"
-                              index="defaultDynamic"
-                              dataField="property_type"
+                              index="default"
+                              dataField="parameter"
                               URLParams
                               aggregationSize={9}
-                              includeFields={['property_type','room_type']}
+                              includeFields={['notes','author.name','device','parameter','title']}
                               // To initialize with default value
                               value={[]}
                               react={{
@@ -151,7 +153,7 @@ function Home() {
                               render={({ aggregationData, loading, value, setValue }) => {
                               return (
                                  <div className="filter-container">
-                                    <h3>Property Types</h3>
+                                    <h3>Parameter Types</h3>
                                     {loading ? (
                                     <div>Loading Filters ...</div>
                                     ) : (
@@ -190,11 +192,11 @@ function Home() {
                               title="Facet"
                               id="facet-component-3"
                               type="term"
-                              index="defaultDynamic"
-                              dataField="address.country"
+                              index="default"
+                              dataField="device"
                               URLParams
                               aggregationSize={9}
-                              includeFields={['property_type','room_type','address.country']}
+                              includeFields={['notes','author.name','device','parameter','title']}
                               // To initialize with default value
                               value={[]}
                               react={{
@@ -203,7 +205,7 @@ function Home() {
                               render={({ aggregationData, loading, value, setValue }) => {
                               return (
                                  <div className="filter-container">
-                                    <h3>Country</h3>
+                                    <h3>Device Type</h3>
                                     {loading ? (
                                     <div>Loading Filters ...</div>
                                     ) : (
@@ -243,14 +245,15 @@ function Home() {
                            <SearchComponent
                               id="result-component"
                               highlight
-                              dataField="name"
+                              dataField="notes"
                               size={5}
-                              includeFields={['name','property_type','room_type']}
+                              includeFields={['notes','author.name','device','parameter','title']}
                               react={{
                               and: ['search-component','facet-component','facet-component-2','facet-component-3']
                               }}
                            >
                               {({ results, loading, size, setValue, setFrom }) => {
+                                 console.log('results',results);
                               return (
                                  <div className="result-list-container">
                                     {loading ? (
@@ -272,9 +275,9 @@ function Home() {
                                           key={item._id}
                                           style={{ padding: 10 }}
                                           >
-                                          <h1>{item.name}</h1>
-                                          
-
+                                          <h1>{item._id}</h1>
+                                          <sub>{item.title}</sub>
+                                          <br />
                                           <span
                                              style={{
                                                 background: '#efefef',
@@ -285,7 +288,11 @@ function Home() {
                                                 width: 'auto'
                                              }}
                                           >
-                                             #{item.property_type} || {item.room_type}
+                                             #{item.device} || {item.parameter}
+                                             <hr />
+                                             <code>
+                                                {item.notes}
+                                             </code>
                                           </span>
                                           </div>
                                        ))}
