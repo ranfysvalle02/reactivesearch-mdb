@@ -275,8 +275,7 @@ function Home() {
                                           key={item._id}
                                           style={{ padding: 10 }}
                                           >
-                                          <h1>{item._id}</h1>
-                                          <sub>{item.title}</sub>
+                                          <h1>{item.title}</h1>
                                           <br />
                                           <span
                                              style={{
@@ -288,7 +287,7 @@ function Home() {
                                                 width: 'auto'
                                              }}
                                           >
-                                             #{item.device} || {item.parameter}
+                                             Device: {item.device} <br /> Parameter: {item.parameter}
                                              <hr />
                                              <code>
                                                 {item.notes}

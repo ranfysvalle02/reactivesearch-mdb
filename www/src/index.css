@@ -58,9 +58,10 @@ body{
   position: absolute;
   display: block;
   list-style: none;
-  width: 20px;
-  height: 20px;
-  background: rgba(0, 237, 100, 0.5);
+  width: 60px;
+  height: 60px;
+  background-size: cover;
+  background-image: url("https://www.shareicon.net/data/256x256/2016/10/29/848502_transport_512x512.png");
   animation: animate 25s linear infinite;
   bottom: -150px;
   
