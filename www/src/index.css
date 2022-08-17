@@ -160,3 +160,32 @@ body{
   }
 
 }
+
+
+
+.filter-container{
+  background:rgba(255,255,255,0.5);
+  text-align: left !important;
+  margin-top:1em;
+}
+.filter-container>h3{
+  padding-left:0.25em;
+  font-weight: bold;
+}
+.filter-container .list-item{
+  background-color: rgba(255,255,255,0.6);
+  padding-left:1em;
+}
+.filter-container .list-item label{
+  padding-left:0.5em;
+}
+.tag{
+  background: lightblue;
+  border-radius: 5px;
+  font-size: 0.7em;
+  padding:5px;
+  margin-left:5px;
+}
+.device.tag{
+  background: orange;
+}

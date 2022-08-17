@@ -41,36 +41,16 @@ function Profile() {
             </div>
             <div>
             <Container style={{height:"70vh", overflow:"auto"}}>
-               <Row>
-                     <Col xs="12" style={{maxWidth:"320px", margin:"0 auto"}}>
-                        <Card style={{marginTop:"1em"}}> 
-                                 <CardImg
-                                    alt=""
-                                    src={avatarURL}
-                                    top
-                                    width="100%"
-                                 />
-                                 <CardBody>
-                                    <CardTitle tag="h5">
-                                    {String(cEmail).split("@")[0]}
-                                    </CardTitle>
-                                    <CardSubtitle
-                                    className="mb-2 text-muted"
-                                    tag="h6"
-                                    >
-                                    {String(cEmail).split("@")[1]}
-                                    </CardSubtitle>
-                                    <CardSubtitle
-                                    className="mb-2 text-muted"
-                                    tag="h6"
-                                    >
-                                    
-                                    </CardSubtitle>
-                                    
-                                 </CardBody>
-                              </Card>
-                     </Col>
-               </Row>   
+               
+            <iframe style={{
+                                    width: "100%",
+                                    height: "70vh",
+                                    background:"#F1F5F4",
+                                    border: "none",
+                                    borderRadius: "2px",
+                                    boxShadow: "0 2px 10px 0 rgba(70, 76, 79, .2)"
+                                 }} src="https://charts.mongodb.com/charts-runkel-bbjup/embed/dashboards?id=0f196545-c986-45c7-86b2-30fb1cc44efd&theme=light&autoRefresh=true&maxDataAge=3600&showTitleAndDesc=true&scalingWidth=scale&scalingHeight=scale"></iframe>                                    
+                                 
             </Container>
                   
                

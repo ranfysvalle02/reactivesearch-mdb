@@ -41,6 +41,15 @@ function Navigation() {
                            </Link>
                         </NavLink>
                      </NavItem>
+
+                     <NavItem>
+                        <NavLink>
+                           <Link style={{textDecoration:"none",color:"white",padding:"1em",letterSpacing:"3px"}} to={"/dashboard"}>
+                              Dashboard
+                           </Link>
+                        </NavLink>
+                     </NavItem>
+
                      {!authed &&
                      <NavItem style={{display:"none"}}>
                         <NavLink>
@@ -49,15 +58,6 @@ function Navigation() {
                            </Link>
                         </NavLink>
                      </NavItem>                     
-                     }
-                     {authed &&
-                     <NavItem>
-                        <NavLink>
-                           <Link style={{textDecoration:"none",color:"white",padding:"1em",letterSpacing:"3px"}} to={"/profile"}>
-                              Profile
-                           </Link>
-                        </NavLink>
-                     </NavItem>
                      }
                   </Nav>
                </Collapse>

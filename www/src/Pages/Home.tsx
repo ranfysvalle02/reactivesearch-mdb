@@ -57,6 +57,12 @@ function Home() {
                <Row>
                   <Col>
                   <SearchBase
+                     transformRequest={(request)=>{
+                        console.log('request',JSON.parse(request.body));
+                        return Promise.resolve({
+                           ...request
+                        })
+                     }}
                      index="default"
                      url="https://us-east-1.aws.data.mongodb-api.com/app/runkel-rfv-demo-tyypa/endpoint/rs_demo"
                      credentials="funkydemo:funkydemo"
@@ -64,6 +70,7 @@ function Home() {
                         db: 'aerospace',
                         collection: 'notes'
                      }}
+                     
                   >
                      <div>
                         <div className="row">
@@ -72,7 +79,7 @@ function Home() {
                               id="search-component"
                            	index="default" 
                               dataField={["notes"]}
-                              includeFields={['notes','title','author.name','device','parameter']}
+                              includeFields={['notes','author.name','device','parameter','title','timeStamp']}
                               placeholder="Search for notes"
                               fuzziness={1}
                               autosuggest={true}
@@ -95,7 +102,7 @@ function Home() {
                               dataField="author.name"
                               URLParams
                               aggregationSize={5}
-                              includeFields={['notes','author.name','device','parameter']}
+                              includeFields={['notes','author.name','device','parameter','title','timeStamp']}
                               // To initialize with default value
                               value={[]}
                               render={({ aggregationData, loading, value, setValue }) => {
@@ -144,7 +151,7 @@ function Home() {
                               dataField="parameter"
                               URLParams
                               aggregationSize={9}
-                              includeFields={['notes','author.name','device','parameter','title']}
+                              includeFields={['notes','author.name','device','parameter','title','timeStamp']}
                               // To initialize with default value
                               value={[]}
                               react={{
@@ -196,7 +203,7 @@ function Home() {
                               dataField="device"
                               URLParams
                               aggregationSize={9}
-                              includeFields={['notes','author.name','device','parameter','title']}
+                              includeFields={['notes','author.name','device','parameter','title','timeStamp']}
                               // To initialize with default value
                               value={[]}
                               react={{
@@ -245,9 +252,10 @@ function Home() {
                            <SearchComponent
                               id="result-component"
                               highlight
-                              dataField="notes"
+                              sortBy="desc"
+                              dataField="timeStamp"
                               size={5}
-                              includeFields={['notes','author.name','device','parameter','title']}
+                              includeFields={['notes','author.name','device','parameter','title','timeStamp']}
                               react={{
                               and: ['search-component','facet-component','facet-component-2','facet-component-3']
                               }}
@@ -273,26 +281,20 @@ function Home() {
                                           <div
                                           className="item-content text-left"
                                           key={item._id}
-                                          style={{ padding: 10 }}
+                                          style={{ 
+                                             background: "rgba(255,255,255,0.6)",
+                                             border: "5px solid white",
+                                             marginTop:"10px",
+                                             padding: 10 ,
+                                             textAlign: "left"
+                                          }}
                                           >
-                                          <h1>{item.title}</h1>
-                                          <br />
-                                          <span
-                                             style={{
-                                                background: '#efefef',
-                                                padding: 3,
-                                                borderRadius: 3,
-                                                marginTop: 10,
-                                                marginBottom: 10,
-                                                width: 'auto'
-                                             }}
-                                          >
-                                             Device: {item.device} <br /> Parameter: {item.parameter}
-                                             <hr />
-                                             <code>
-                                                {item.notes}
-                                             </code>
-                                          </span>
+                                          
+                                          <h5 style={{fontWeight:"bolder",fontSize:"0.9em"}}>{String(item.timeStamp).split('T')[0]} @ {String(item.timeStamp).split('T')[1]} <span className="tag device"><b>{item.device}</b></span><span className="tag"><b>{item.parameter}</b></span></h5>
+                                          <h5><b>{item.title}</b></h5>
+                                          <p style={{fontWeight:"lighter"}}>
+                                             {item.notes}
+                                          </p>
                                           </div>
                                        ))}
                                     </div>
