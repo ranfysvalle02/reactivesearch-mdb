@@ -45,7 +45,7 @@ function Navigation() {
                      <NavItem>
                         <NavLink>
                            <Link style={{textDecoration:"none",color:"white",padding:"1em",letterSpacing:"3px"}} to={"/dashboard"}>
-                              Dashboard
+                              Charts
                            </Link>
                         </NavLink>
                      </NavItem>

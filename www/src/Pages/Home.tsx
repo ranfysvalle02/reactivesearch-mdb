@@ -262,6 +262,13 @@ function Home() {
                            >
                               {({ results, loading, size, setValue, setFrom }) => {
                                  console.log('results',results);
+                                 let getURL = function (x){
+                                    console.log('x',x);
+                                    let d1 = String(x.timeStamp).split("+")[0];
+                                    console.log('d1',d1);
+                                    let path = String(window.location.href);
+                                    return path+"dashboard?t="+encodeURIComponent(d1);
+                                 };
                               return (
                                  <div className="result-list-container">
                                     {loading ? (
@@ -291,7 +298,7 @@ function Home() {
                                           >
                                           
                                           <h5 style={{fontWeight:"bolder",fontSize:"0.9em"}}>{String(item.timeStamp).split('T')[0]} @ {String(item.timeStamp).split('T')[1]} <span className="tag device"><b>{item.device}</b></span><span className="tag"><b>{item.parameter}</b></span></h5>
-                                          <h5><b>{item.title}</b></h5>
+                                          <h5><b>{item.title}</b> <a href={getURL(item)} target="_blank">View Chart</a></h5>
                                           <p style={{fontWeight:"lighter"}}>
                                              {item.notes}
                                           </p>
