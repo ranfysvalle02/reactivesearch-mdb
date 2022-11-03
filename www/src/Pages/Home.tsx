@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Button, Card, CardBody, CardGroup, CardImg, CardSubtitle, CardText, CardTitle, Col, Container, Form, FormGroup, FormText, Input, Label, Row } from "reactstrap";
-import RPM from "../components/RPM";
 
 import { useAuth } from "../hooks/useAuth";
 import axios from 'axios';
@@ -12,28 +11,9 @@ function Home() {
 
    const [data,setData] = React.useState([]);
 
-   const LEADERBOARD_URL = "";//"https://us-east-1.aws.data.mongodb-api.com/app/application-0-blkhf/endpoint/leaderboard";
 
    React.useEffect(() => {
-      /*
-      axios.get(LEADERBOARD_URL)
-      .then(res => {
-         console.log('res',res)
-         setData(res.data);
-      })
-      let appRefreshInterval = setInterval(function(){
-         axios.get(LEADERBOARD_URL)
-            .then(res => {
-               console.log('res',res)
-               setData(res.data);
-            })
-      },5000);
-      // Specify how to clean up after this effect:
-      return function cleanup() {
-         console.log('clearing refresh interval');
-         clearInterval(appRefreshInterval);
-      };
-      */
+
    },[]);
    return <div className="home-content">
             <div className="context">
