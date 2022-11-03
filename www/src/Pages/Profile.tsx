@@ -6,20 +6,13 @@ import axios from 'axios';
 
 function Profile() {
    const { authed, loading, vote, getCustomData } = useAuth();
-   const [avatarURL,setAvatarURL] = React.useState("");
    const [cEmail,setCurrentEmail] = React.useState("");
 
    let dbURL = "https://charts.mongodb.com/charts-runkel-bbjup/embed/dashboards?id=0f196545-c986-45c7-86b2-30fb1cc44efd&theme=light&autoRefresh=true&maxDataAge=3600&showTitleAndDesc=false&scalingWidth=scale&scalingHeight=scale";
    let chURL = "https://charts.mongodb.com/charts-runkel-bbjup/embed/charts?id=62f80adc-5ed6-473b-81b9-067068b5a03a&maxDataAge=3600&theme=light&autoRefresh=true";
    const [iframeURL,setURL] = React.useState("");
    React.useEffect(() => {
-      if(authed){
-         getCustomData().then((cd)=>{
-            console.log('cd',cd);
-            setAvatarURL(cd.avatarURL);
-            setCurrentEmail(cd.email);
-         })
-      }
+      
       const urlSearchParams = new URLSearchParams(window.location.search);
       const params = Object.fromEntries(urlSearchParams.entries());
       if(urlSearchParams && params.t){
